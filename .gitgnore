@@ -1,0 +1,3 @@
+a.out
+./src/**/a.out
+*.gch

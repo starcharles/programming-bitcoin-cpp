@@ -4,6 +4,9 @@
     "deque": "cpp",
     "list": "cpp",
     "string": "cpp",
-    "vector": "cpp"
-  }
+    "vector": "cpp",
+    "stdexcept": "cpp"
+  },
+  "editor.formatOnSave": true,
+  "clang-format.executable": "/usr/local/bin/clang-format",
 }

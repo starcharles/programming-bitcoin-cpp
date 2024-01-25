@@ -50,7 +50,21 @@ FieldElement FieldElement::operator*(const FieldElement& other) const {
   return FieldElement((num_ * other.num()) % prime_, prime_);
 }
 
-FieldElement FieldElement::pow(const int exponent) const {
+FieldElement FieldElement::operator/(const FieldElement& other) const {
+  if(prime_ != other.prime()) {
+    throw std::invalid_argument("invalid prime");
+  }
+
+  return FieldElement((num_*(other.num()^(other.prime() - 2))) % prime_, prime_);
+}
+
+FieldElement FieldElement::operator^(const int exponent) const {
+  int n = exponent;
+  while (n < 0)
+  {
+    n += prime_ - 1;
+  }
+  
   auto pow = static_cast<int>(std::pow(num_, exponent)) % prime_;
   return FieldElement(pow, prime_);
 }

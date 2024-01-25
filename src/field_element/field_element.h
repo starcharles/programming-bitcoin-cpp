@@ -13,7 +13,8 @@ class FieldElement {
   FieldElement operator+(const FieldElement& other) const;
   FieldElement operator-(const FieldElement& other) const;
   FieldElement operator*(const FieldElement& other) const;
-  FieldElement pow(const int exponent) const;
+  FieldElement operator/(const FieldElement& other) const;
+  FieldElement operator^(const int exponent) const;
   int num() const;
   int prime() const;
 };

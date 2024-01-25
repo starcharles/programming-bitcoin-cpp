@@ -1,0 +1,18 @@
+
+TESTS = tests/field_element/field_element_tests.cpp 
+
+test_SOURCES = $(TESTS)
+test_CPPFLAGS = $(AM_CPPFLAGS)
+
+CLEAN_TEST = tests/**/*.gcda
+
+CLEAN_FILES = $(CLEAN_TEST)
+
+test: test_run test_clean 
+
+test_run:
+	$(CXX) $(CXXFLAGS) $(test_CPPFLAGS) $(DEPENDENCY_SOURCES) $(test_SOURCES) -o tests/test_main $(LDADD)
+	./tests/test_main
+
+test_clean:
+	rm -f $(CLEAN_FILES)

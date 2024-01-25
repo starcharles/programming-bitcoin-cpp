@@ -76,3 +76,8 @@ int FieldElement::num() const {
 int FieldElement::prime() const {
   return prime_;
 }
+
+std::ostream& operator<<(std::ostream& os, const FieldElement& f) {
+    os << "FieldElement(" << f.num() << ", " << f.prime() << ")";
+    return os;
+}

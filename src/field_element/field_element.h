@@ -18,3 +18,5 @@ class FieldElement {
   int num() const;
   int prime() const;
 };
+
+std::ostream& operator<<(std::ostream& os, const FieldElement& f);

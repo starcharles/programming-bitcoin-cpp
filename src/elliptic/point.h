@@ -2,10 +2,10 @@
 
 class Point {
 private:
-  int _a;
-  int _b;
   int _x;
   int _y;
+  int _a;
+  int _b;
 
 public:
   Point() = delete;
@@ -20,7 +20,8 @@ public:
 
 Point::Point(int x, int y, int a, int b) : _x(x), _y(y), _a(a), _b(b) {
   if (y * y != x * x * x + a * x + b) {
-    throw std::invalid_argument((x, y) + "is not on the curve");
+    throw std::invalid_argument("Point(" + std::to_string(x) + ", " +
+                                std::to_string(y) + ") is not on the curve");
   }
 };
 

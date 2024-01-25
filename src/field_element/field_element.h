@@ -6,7 +6,6 @@ class FieldElement {
 
  public:
   FieldElement(int num, int prime);
-  FieldElement(const FieldElement& other);
   FieldElement& operator=(const FieldElement& other);
   bool operator==(const FieldElement& other) const;
   bool operator!=(const FieldElement& other) const;

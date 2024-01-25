@@ -23,7 +23,50 @@ bool FieldElement::operator==(const FieldElement& other) const {
 }
 
 bool FieldElement::operator!=(const FieldElement& other) const {
-  return !(other.num() == num_ && other.prime() == prime_);
+  return !(*this == other);
+}
+
+FieldElement FieldElement::operator+(const FieldElement& other) const {
+  if(prime_ != other.prime()) {
+    throw std::invalid_argument("invalid prime");
+  }
+
+  return FieldElement((num_ + other.num()) % prime_, prime_);
+}
+
+FieldElement FieldElement::operator-(const FieldElement& other) const {
+  if(prime_ != other.prime()) {
+    throw std::invalid_argument("invalid prime");
+  }
+
+  return FieldElement((num_ - other.num()) % prime_, prime_);
+}
+
+FieldElement FieldElement::operator*(const FieldElement& other) const {
+  if(prime_ != other.prime()) {
+    throw std::invalid_argument("invalid prime");
+  }
+
+  return FieldElement((num_ * other.num()) % prime_, prime_);
+}
+
+FieldElement FieldElement::operator/(const FieldElement& other) const {
+  if(prime_ != other.prime()) {
+    throw std::invalid_argument("invalid prime");
+  }
+
+  return FieldElement((num_*(other.num()^(other.prime() - 2))) % prime_, prime_);
+}
+
+FieldElement FieldElement::operator^(const int exponent) const {
+  int n = exponent;
+  while (n < 0)
+  {
+    n += prime_ - 1;
+  }
+  
+  auto pow = static_cast<int>(std::pow(num_, exponent)) % prime_;
+  return FieldElement(pow, prime_);
 }
 
 int FieldElement::num() const {
@@ -32,4 +75,9 @@ int FieldElement::num() const {
 
 int FieldElement::prime() const {
   return prime_;
+}
+
+std::ostream& operator<<(std::ostream& os, const FieldElement& f) {
+    os << "FieldElement(" << f.num() << ", " << f.prime() << ")";
+    return os;
 }

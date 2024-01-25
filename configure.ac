@@ -4,7 +4,7 @@
 AC_PREREQ([2.72])
 AC_INIT([ProgrammingBitcoin-CPP], [0.0.1], [stardustforever012@gmail.com])
 AM_INIT_AUTOMAKE([foreign])
-AC_CONFIG_SRCDIR([main.cpp])
+AC_CONFIG_SRCDIR([src/main.cpp])
 AC_CONFIG_HEADERS([config.h])
 
 # Checks for programs.

@@ -8,7 +8,7 @@ TESTS = \
 #tests/elliptic/point_tests.cpp 
 
 test_SOURCES = $(TESTS)
-test_CPPFLAGS = $(AM_CPPFLAGS)
+test_CPPFLAGS = $(AM_CPPFLAGS_TEST)
 CLEAN_TEST = tests/**/*.gcda
 CLEAN_FILES = $(CLEAN_TEST)
 LDADD+=-lboost_unit_test_framework

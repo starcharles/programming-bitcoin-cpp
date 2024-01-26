@@ -7,6 +7,8 @@ DEPENDENCY_SOURCES =\
 main_SOURCES = main.cpp $(DEPENDENCY_SOURCES)
 
 LDADD=
-AM_CPPFLAGS= -arch x86_64 -I$(srcdir)/field_element -I$(srcdir)/elliptic 
+TEST_ARCH=-arch x86_64
+AM_CPPFLAGS= -I$(srcdir)/field_element -I$(srcdir)/elliptic 
+AM_CPPFLAGS_TEST= $(TEST_ARCH) -I$(srcdir)/field_element -I$(srcdir)/elliptic 
 
 include Makefile.test.include

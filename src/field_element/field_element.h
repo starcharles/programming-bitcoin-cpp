@@ -1,3 +1,6 @@
+#ifndef PROGRAMMING_BITCOIN_FIELD_ELEMENT_H
+#define PROGRAMMING_BITCOIN_FIELD_ELEMENT_H
+
 #include <iostream>
 
 class FieldElement {
@@ -21,3 +24,5 @@ public:
 };
 
 std::ostream &operator<<(std::ostream &os, const FieldElement &f);
+
+#endif // PROGRAMMING_BITCOIN_FIELD_ELEMENT_H

@@ -3,7 +3,7 @@
 
 AC_PREREQ([2.72])
 AC_INIT([ProgrammingBitcoin-CPP], [0.0.1], [stardustforever012@gmail.com])
-AM_INIT_AUTOMAKE([foreign])
+AM_INIT_AUTOMAKE([foreign subdir-objects])
 AC_CONFIG_SRCDIR([src/main.cpp])
 AC_CONFIG_HEADERS([config.h])
 CXXFLAGS="-std=c++20 -Wall -Wextra -Werror -pedantic -O3 -g"

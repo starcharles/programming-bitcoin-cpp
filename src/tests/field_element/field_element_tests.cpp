@@ -1,8 +1,9 @@
-#define BOOST_TEST_MODULE FieldElement
-#include <boost/test/included/unit_test.hpp>
+#include <boost/test/unit_test.hpp>
 #include <field_element.h>
 
 using namespace std;
+
+BOOST_AUTO_TEST_SUITE(FieldElementTests)
 
 namespace field_element {
 BOOST_AUTO_TEST_CASE(equal_and_not_equal) {
@@ -32,3 +33,5 @@ BOOST_AUTO_TEST_CASE(plus) {
   }
 }
 } // namespace field_element
+
+BOOST_AUTO_TEST_SUITE_END()

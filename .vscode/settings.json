@@ -6,7 +6,9 @@
     "string": "cpp",
     "vector": "cpp",
     "stdexcept": "cpp",
-    "cmath": "cpp"
+    "cmath": "cpp",
+    "limits": "cpp",
+    "ostream": "cpp"
   },
   "editor.formatOnSave": true,
   "clang-format.executable": "/usr/local/bin/clang-format",

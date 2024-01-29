@@ -1,5 +1,5 @@
+#include <field_element.h>
 #include <iostream>
-#include "field_element.h"
 
 FieldElement::FieldElement(int num, int prime) : num_(num), prime_(prime) {
   if (num_ >= prime_ || num_ < 0) {
@@ -7,9 +7,10 @@ FieldElement::FieldElement(int num, int prime) : num_(num), prime_(prime) {
   }
 }
 
-FieldElement::FieldElement(const FieldElement& other) : num_(other.num_), prime_(other.prime_) {}
+FieldElement::FieldElement(const FieldElement &other) noexcept
+    : num_(other.num_), prime_(other.prime_) {}
 
-FieldElement& FieldElement::operator=(const FieldElement& other) {
+FieldElement &FieldElement::operator=(const FieldElement &other) noexcept {
   if (this == &other) {
     return *this;
   }
@@ -18,66 +19,62 @@ FieldElement& FieldElement::operator=(const FieldElement& other) {
   return *this;
 }
 
-bool FieldElement::operator==(const FieldElement& other) const {
+bool FieldElement::operator==(const FieldElement &other) const noexcept {
   return other.num() == num_ && other.prime() == prime_;
 }
 
-bool FieldElement::operator!=(const FieldElement& other) const {
+bool FieldElement::operator!=(const FieldElement &other) const noexcept {
   return !(*this == other);
 }
 
-FieldElement FieldElement::operator+(const FieldElement& other) const {
-  if(prime_ != other.prime()) {
+FieldElement FieldElement::operator+(const FieldElement &other) const {
+  if (prime_ != other.prime()) {
     throw std::invalid_argument("invalid prime");
   }
 
   return FieldElement((num_ + other.num()) % prime_, prime_);
 }
 
-FieldElement FieldElement::operator-(const FieldElement& other) const {
-  if(prime_ != other.prime()) {
+FieldElement FieldElement::operator-(const FieldElement &other) const {
+  if (prime_ != other.prime()) {
     throw std::invalid_argument("invalid prime");
   }
 
   return FieldElement((num_ - other.num()) % prime_, prime_);
 }
 
-FieldElement FieldElement::operator*(const FieldElement& other) const {
-  if(prime_ != other.prime()) {
+FieldElement FieldElement::operator*(const FieldElement &other) const {
+  if (prime_ != other.prime()) {
     throw std::invalid_argument("invalid prime");
   }
 
   return FieldElement((num_ * other.num()) % prime_, prime_);
 }
 
-FieldElement FieldElement::operator/(const FieldElement& other) const {
-  if(prime_ != other.prime()) {
+FieldElement FieldElement::operator/(const FieldElement &other) const {
+  if (prime_ != other.prime()) {
     throw std::invalid_argument("invalid prime");
   }
 
-  return FieldElement((num_*(other.num()^(other.prime() - 2))) % prime_, prime_);
+  return FieldElement((num_ * (other.num() ^ (other.prime() - 2))) % prime_,
+                      prime_);
 }
 
 FieldElement FieldElement::operator^(const int exponent) const {
   int n = exponent;
-  while (n < 0)
-  {
+  while (n < 0) {
     n += prime_ - 1;
   }
-  
+
   auto pow = static_cast<int>(std::pow(num_, exponent)) % prime_;
   return FieldElement(pow, prime_);
 }
 
-int FieldElement::num() const {
-  return num_;
-}
+int FieldElement::num() const { return num_; }
 
-int FieldElement::prime() const {
-  return prime_;
-}
+int FieldElement::prime() const { return prime_; }
 
-std::ostream& operator<<(std::ostream& os, const FieldElement& f) {
-    os << "FieldElement(" << f.num() << ", " << f.prime() << ")";
-    return os;
+std::ostream &operator<<(std::ostream &os, const FieldElement &f) {
+  os << "FieldElement(" << f.num() << ", " << f.prime() << ")";
+  return os;
 }

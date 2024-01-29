@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+#define MY_INFINITY std::numeric_limits<int>::max()
+
 class Point {
 private:
   int _x;
@@ -21,6 +23,8 @@ public:
   int x() const;
   int y() const;
 };
+
+bool IsInfinity(const Point &p);
 
 std::ostream &operator<<(std::ostream &os, const Point &p);
 

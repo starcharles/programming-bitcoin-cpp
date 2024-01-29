@@ -2,7 +2,7 @@
 #include <point.h>
 
 Point::Point(int x, int y, int a, int b) : _x(x), _y(y), _a(a), _b(b) {
-  if (x == INFINITY && y == INFINITY) {
+  if (isinf(x) && isinf(y)) {
     return;
   }
   if (y * y != x * x * x + a * x + b) {
@@ -32,18 +32,18 @@ Point Point::operator+(const Point &other) const {
   }
 
   // Case 0.0: self is the point at infinity, return other
-  if (isinf(_x) && isinf(_y)) {
+  if (IsInfinity(*this)) {
     return other;
   }
 
   // Case 0.1: other is the point at infinity, return self
-  if (isinf(other.x()) && isinf(other.y())) {
+  if (IsInfinity(other)) {
     return *this;
   }
 
   // Case 1: self.x == other.x, self.y != other.y return point at infinity
   if (_x == other.x() && _y != other.y()) {
-    return Point(INFINITY, INFINITY, _a, _b);
+    return Point(MY_INFINITY, MY_INFINITY, _a, _b);
   }
 
   // Case 2: self.x ≠ other.x return the result of the point addition formula
@@ -56,22 +56,26 @@ Point Point::operator+(const Point &other) const {
 
   // Case 3: self == other
   if (*this == other) {
-    int s = (3 * _x * _x + _a) / (2 * _y);
-    int x = s * s - 2 * _x;
+    int s = ((3 * _x * _x) + _a) / (2 * _y);
+    int x = (s * s) - (2 * _x);
     int y = s * (_x - x) - _y;
     return Point(x, y, _a, _b);
   }
 
   // Case 4: self == other and y == 0
   if (*this == other && _y == 0) {
-    return Point(INFINITY, INFINITY, _a, _b);
+    return Point(MY_INFINITY, MY_INFINITY, _a, _b);
   }
 
-  return Point(INFINITY, INFINITY, _a, _b);
+  return Point(MY_INFINITY, MY_INFINITY, _a, _b);
+};
+
+bool IsInfinity(const Point &p) {
+  return p.x() == MY_INFINITY && p.y() == MY_INFINITY;
 };
 
 std::ostream &operator<<(std::ostream &os, const Point &p) {
-  if (p.x() == INFINITY && p.y() == INFINITY) {
+  if (p.x() == MY_INFINITY && p.y() == MY_INFINITY) {
     os << "Point(infinity)";
   } else {
     os << "Point(" << p.x() << ", " << p.y() << ")_" << p.a() << "_" << p.b();

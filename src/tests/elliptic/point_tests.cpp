@@ -1,12 +1,8 @@
 
-#define BOOST_TEST_NO_MAIN
-// #define BOOST_TEST_MODULE PointTestSuite
 #include <boost/test/included/unit_test.hpp>
-#include <field_element.h>
 #include <point.h>
 
-// using namespace std;
-using namespace boost::unit_test;
+using namespace std;
 
 FieldElement elem(int x) { return FieldElement(x, 223); }
 

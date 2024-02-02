@@ -8,7 +8,9 @@
     "stdexcept": "cpp",
     "cmath": "cpp",
     "limits": "cpp",
-    "ostream": "cpp"
+    "ostream": "cpp",
+    "iosfwd": "cpp",
+    "streambuf": "cpp"
   },
   "editor.formatOnSave": true,
   "clang-format.executable": "/usr/local/bin/clang-format",

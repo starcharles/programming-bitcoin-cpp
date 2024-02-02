@@ -1,23 +1,30 @@
-#include <cmath>
+#include <field_element.h>
+#include <iostream>
 #include <point.h>
+#include <sstream>
 
-Point::Point(int x, int y, int a, int b) : _x(x), _y(y), _a(a), _b(b) {
-  if (isinf(x) && isinf(y)) {
+#define ZERO FieldElement(0, 0)
+#define INIFINITY_POINT Point(ZERO, ZERO, ZERO, ZERO)
+
+Point::Point(FieldElement x, FieldElement y, FieldElement a, FieldElement b)
+    : _x(x), _y(y), _a(a), _b(b) {
+  if (!IsInfinity(Point(x, y, a, b))) {
     return;
   }
   if (y * y != x * x * x + a * x + b) {
-    throw std::invalid_argument("Point(" + std::to_string(x) + ", " +
-                                std::to_string(y) + ") is not on the curve");
+    std::ostringstream oss;
+    oss << "Point(" << x << ", " << y << ") is not on the curve";
+    throw std::invalid_argument(oss.str());
   }
 };
 
-int Point::a() const { return _a; };
+FieldElement Point::a() const { return _a; };
 
-int Point::b() const { return _b; };
+FieldElement Point::b() const { return _b; };
 
-int Point::x() const { return _x; };
+FieldElement Point::x() const { return _x; };
 
-int Point::y() const { return _y; };
+FieldElement Point::y() const { return _y; };
 
 bool Point::operator==(const Point &other) const {
   return _x == other.x() && _y == other.y() && _a == other.a() &&
@@ -43,39 +50,41 @@ Point Point::operator+(const Point &other) const {
 
   // Case 1: self.x == other.x, self.y != other.y return point at infinity
   if (_x == other.x() && _y != other.y()) {
-    return Point(MY_INFINITY, MY_INFINITY, _a, _b);
+    return INIFINITY_POINT;
   }
 
   // Case 2: self.x ≠ other.x return the result of the point addition formula
   if (_x != other.x()) {
-    int s = (other.y() - _y) / (other.x() - _x);
-    int x = s * s - _x - other.x();
-    int y = s * (_x - x) - _y;
+    FieldElement s = (other.y() - _y) / (other.x() - _x);
+    FieldElement x = s * s - _x - other.x();
+    FieldElement y = s * (_x - x) - _y;
     return Point(x, y, _a, _b);
   }
 
   // Case 3: self == other
   if (*this == other) {
-    int s = ((3 * _x * _x) + _a) / (2 * _y);
-    int x = (s * s) - (2 * _x);
-    int y = s * (_x - x) - _y;
+    int prime = this->a().prime();
+    FieldElement s = ((FieldElement(3, prime) * _x * _x) + _a) /
+                     (FieldElement(2, prime) * _y);
+    FieldElement x = (s * s) - (FieldElement(2, prime) * _x);
+    FieldElement y = s * (_x - x) - _y;
     return Point(x, y, _a, _b);
   }
 
-  // Case 4: self == other and y == 0
-  if (*this == other && _y == 0) {
-    return Point(MY_INFINITY, MY_INFINITY, _a, _b);
+  // Case 4: self == other and y == ZERO
+  if (*this == other && _y == ZERO) {
+    return INIFINITY_POINT;
   }
 
-  return Point(MY_INFINITY, MY_INFINITY, _a, _b);
+  return INIFINITY_POINT;
 };
 
 bool IsInfinity(const Point &p) {
-  return p.x() == MY_INFINITY && p.y() == MY_INFINITY;
+  return p.x().num() == INT_INFINITY && p.y().num() == INT_INFINITY;
 };
 
 std::ostream &operator<<(std::ostream &os, const Point &p) {
-  if (p.x() == MY_INFINITY && p.y() == MY_INFINITY) {
+  if (IsInfinity(p)) {
     os << "Point(infinity)";
   } else {
     os << "Point(" << p.x() << ", " << p.y() << ")_" << p.a() << "_" << p.b();

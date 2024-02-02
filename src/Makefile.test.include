@@ -4,13 +4,10 @@ TESTS = \
 	tests/field_element/field_element_tests.cpp \
 	tests/elliptic/point_tests.cpp 
 	
-#tests/main.cpp \
-#tests/elliptic/point_tests.cpp 
-
 test_SOURCES = $(TESTS)
-test_CPPFLAGS = $(AM_CPPFLAGS_TEST)
+test_CPPFLAGS = $(CPPFLAGS) $(AM_CPPFLAGS_TEST)
 CLEAN_TEST = tests/**/*.gcda
-CLEAN_FILES = $(CLEAN_TEST)
+CLEAN_FILES = tests/test_main $(CLEAN_TEST)
 LDADD+=-lboost_unit_test_framework
 
 # make commands

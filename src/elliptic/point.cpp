@@ -7,7 +7,7 @@
 
 Point::Point(FieldElement x, FieldElement y, FieldElement a, FieldElement b)
     : _x(x), _y(y), _a(a), _b(b) {
-  if (!IsInfinity(Point(x, y, a, b))) {
+  if (IsInfinity(Point(x, y, a, b))) {
     return;
   }
   if (y * y != x * x * x + a * x + b) {

@@ -8,11 +8,11 @@ FieldElement elem(int x) { return FieldElement(x, 223); }
 
 BOOST_AUTO_TEST_SUITE(PointTests)
 
-namespace point_test {
+namespace point {
 BOOST_AUTO_TEST_CASE(valid_point) {
-  FieldElement x(170, 223);
-  FieldElement y(142, 223);
-  FieldElement a(1, 223);
+  FieldElement x(192, 223);
+  FieldElement y(105, 223);
+  FieldElement a(0, 223);
   FieldElement b(7, 223);
   // y * y == x * x * x + a * x + b
   BOOST_CHECK_NO_THROW(Point(x, y, a, b));
@@ -59,6 +59,6 @@ BOOST_AUTO_TEST_CASE(add_point_to_self) {
   // BOOST_CHECK_EQUAL(p4 + p5, p6);
 }
 
-} // namespace point_test
+} // namespace point
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -5,7 +5,7 @@ using namespace std;
 
 BOOST_AUTO_TEST_SUITE(FieldElementTests)
 
-namespace field_element {
+namespace field_element_test {
 BOOST_AUTO_TEST_CASE(equal_and_not_equal) {
   const FieldElement f1(1, 7);
   const FieldElement f2(2, 7);
@@ -32,6 +32,6 @@ BOOST_AUTO_TEST_CASE(plus) {
     cout << f3 << endl;
   }
 }
-} // namespace field_element
+} // namespace field_element_test
 
 BOOST_AUTO_TEST_SUITE_END()

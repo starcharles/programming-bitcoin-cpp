@@ -13,6 +13,9 @@ LDADD+=-lboost_unit_test_framework
 # make commands
 test: test_run test_clean 
 
+test2:
+	$(CXX) -E $(CXXFLAGS) $(test_CPPFLAGS) $(test_SOURCES) $(DEPENDENCY_SOURCES)
+
 test_run: $(test_SOURCES)
 	$(CXX) $(CXXFLAGS) $(test_CPPFLAGS) $(test_SOURCES) $(DEPENDENCY_SOURCES) -o tests/test_main $(LDADD)
 	./tests/test_main

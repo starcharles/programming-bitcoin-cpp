@@ -1,11 +1,15 @@
+
 #include <boost/test/included/unit_test.hpp>
+#include <field_element.h>
 #include <math.h>
 #include <point.h>
+
+#define BOOST_TEST_NO_MAIN
 
 using namespace std;
 
 BOOST_AUTO_TEST_SUITE(PointTests)
-namespace point {
+namespace point_test {
 BOOST_AUTO_TEST_CASE(valid_point) {
   FieldElement x(170, 223);
   FieldElement y(142, 223);
@@ -60,6 +64,6 @@ BOOST_AUTO_TEST_CASE(valid_point) {
 //   BOOST_CHECK_EQUAL(p4 + p5, p6);
 // }
 
-} // namespace point
+} // namespace point_test
 
 BOOST_AUTO_TEST_SUITE_END()

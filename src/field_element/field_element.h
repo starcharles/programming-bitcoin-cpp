@@ -23,6 +23,7 @@ public:
   int prime() const;
 };
 
+int my_pow(int base, int exponent, int prime);
 std::ostream &operator<<(std::ostream &os, const FieldElement &f);
 
 #endif // PROGRAMMING_BITCOIN_FIELD_ELEMENT_H

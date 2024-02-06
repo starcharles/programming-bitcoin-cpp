@@ -4,8 +4,6 @@
 #include <field_element.h>
 #include <iostream>
 
-#define INT_INFINITY std::numeric_limits<int>::max()
-
 class Point {
 private:
   FieldElement _x;

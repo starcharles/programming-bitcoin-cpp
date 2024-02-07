@@ -65,6 +65,24 @@ BOOST_AUTO_TEST_CASE(add_point_to_self) {
 
   BOOST_CHECK_EQUAL(p3 + p3, p4);
 }
+
+BOOST_AUTO_TEST_CASE(mul) {
+  Point p1(elem223(192), elem223(105), elem223(0), elem223(7));
+  Point p2(elem223(49), elem223(71), elem223(0), elem223(7));
+  BOOST_CHECK_EQUAL(2 * p1, p2);
+
+  Point p3(elem223(143), elem223(98), elem223(0), elem223(7));
+  Point p4(elem223(64), elem223(168), elem223(0), elem223(7));
+
+  BOOST_CHECK_EQUAL(2 * p3, p4);
+
+  Point p5(elem223(47), elem223(71), elem223(0), elem223(7));
+  Point p6(elem223(194), elem223(51), elem223(0), elem223(7));
+
+  BOOST_CHECK_EQUAL(4 * p5, p6);
+
+  BOOST_CHECK_EQUAL(21 * p5, INIFINITY_POINT);
+}
 } // namespace point
 
 BOOST_AUTO_TEST_SUITE_END();

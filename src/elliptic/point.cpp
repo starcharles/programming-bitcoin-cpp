@@ -63,9 +63,21 @@ Point Point::operator+(const Point &other) const {
   auto s = ((3 * _x * _x) + _a) / (2 * _y);
   auto x = (s * s) - (FieldElement(2, prime) * _x);
   auto y = s * (_x - x) - _y;
-  std::cout << "*this == other: x: " << x << ", y: " << y << std::endl;
   return Point(x, y, _a, _b);
   // }
+};
+
+Point Point::operator*(const int coefficient) const {
+  auto current = *this;
+  auto result = INIFINITY_POINT;
+  for (int i = 0; i < coefficient; i++) {
+    result = result + current;
+  }
+  return result;
+};
+
+Point operator*(const int coefficient, const Point &p) {
+  return p * coefficient;
 };
 
 bool IsInfinity(const Point &p) { return p == INIFINITY_POINT; };

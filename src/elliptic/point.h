@@ -19,11 +19,14 @@ public:
   bool operator==(const Point &other) const;
   bool operator!=(const Point &other) const;
   Point operator+(const Point &other) const;
+  Point operator*(const int coefficient) const;
   FieldElement a() const;
   FieldElement b() const;
   FieldElement x() const;
   FieldElement y() const;
 };
+
+Point operator*(const int coefficient, const Point &p);
 
 bool IsInfinity(const Point &p);
 

@@ -1,8 +1,11 @@
 bin_PROGRAMS = main
 
 DEPENDENCY_SOURCES =\
+    util/uint256.h \
     field_element/field_element.cpp \
-    elliptic/point.cpp 
+    elliptic/point.cpp \ 
+    secp256k1/s256_field.cpp \ 
+    secp256k1/s256_point.cpp 
 
 main_SOURCES = main.cpp $(DEPENDENCY_SOURCES)
 

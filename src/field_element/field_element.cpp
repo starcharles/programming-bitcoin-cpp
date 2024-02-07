@@ -1,7 +1,9 @@
 #include <field_element.h>
 #include <iostream>
+#include <uint256.h>
 
-FieldElement::FieldElement(int num, int prime) : num_(num), prime_(prime) {
+FieldElement::FieldElement(uint256 num, uint256 prime)
+    : num_(num), prime_(prime) {
   if (num_ >= prime_ || num_ < 0) {
     throw std::invalid_argument("Num is not in field range 0 to p-1");
   }
@@ -48,11 +50,13 @@ FieldElement FieldElement::operator-(const FieldElement &other) const {
   return FieldElement(num, prime_);
 }
 
-FieldElement FieldElement::operator*(int scalar) const {
+FieldElement FieldElement::operator*(uint256 scalar) const {
   return FieldElement((num_ * scalar) % prime_, prime_);
 }
 
-FieldElement operator*(int scalar, const FieldElement &f) { return f * scalar; }
+FieldElement operator*(uint256 scalar, const FieldElement &f) {
+  return f * scalar;
+}
 
 FieldElement FieldElement::operator*(const FieldElement &other) const {
   if (prime_ != other.prime()) {
@@ -66,32 +70,32 @@ FieldElement FieldElement::operator/(const FieldElement &other) const {
   if (prime_ != other.prime()) {
     throw std::invalid_argument("invalid prime");
   }
-  int num =
+  uint256 num =
       (num_ * my_pow(other.num(), other.prime() - 2, other.prime())) % prime_;
   return FieldElement(num, prime_);
 }
 
-FieldElement FieldElement::operator^(const int exponent) const {
-  int n = exponent;
+FieldElement FieldElement::operator^(const uint256 exponent) const {
+  uint256 n = exponent;
   while (n < 0) {
     n += prime_ - 1;
   }
-  int num = my_pow(num_, n, prime_);
+  uint256 num = my_pow(num_, n, prime_);
   return FieldElement(num, prime_);
 }
 
-int FieldElement::num() const { return num_; }
+uint256 FieldElement::num() const { return num_; }
 
-int FieldElement::prime() const { return prime_; }
+uint256 FieldElement::prime() const { return prime_; }
 
 std::ostream &operator<<(std::ostream &os, const FieldElement &f) {
   os << "FieldElement(" << f.num() << ", " << f.prime() << ")";
   return os;
 }
 
-int my_pow(int base, int exp, int mod) {
-  int result = 1;
-  for (int i = 0; i < exp; i++) {
+uint256 my_pow(uint256 base, uint256 exp, uint256 mod) {
+  uint256 result = 1;
+  for (uint256 i = 0; i < exp; i += 1) {
     result *= base;
     result %= mod;
   }

@@ -2,9 +2,6 @@
 #include <point.h>
 #include <sstream>
 
-#define ZERO FieldElement(0, 3)
-#define INIFINITY_POINT Point(ZERO, ZERO, ZERO, ZERO)
-
 Point::Point(FieldElement x, FieldElement y, FieldElement a, FieldElement b)
     : _x(x), _y(y), _a(a), _b(b) {
   if (y * y != x * x * x + a * x + b) {
@@ -30,10 +27,6 @@ bool Point::operator==(const Point &other) const {
 bool Point::operator!=(const Point &other) const { return !(*this == other); };
 
 Point Point::operator+(const Point &other) const {
-  if (_a != other.a() || _b != other.b()) {
-    throw std::invalid_argument("Points must be on the same curve");
-  }
-
   // Case 0.0: self is the point at infinity, return other
   if (IsInfinity(*this)) {
     return other;
@@ -42,6 +35,10 @@ Point Point::operator+(const Point &other) const {
   // Case 0.1: other is the point at infinity, return self
   if (IsInfinity(other)) {
     return *this;
+  }
+
+  if (_a != other.a() || _b != other.b()) {
+    throw std::invalid_argument("Points must be on the same curve");
   }
 
   // Case 1: self.x == other.x, self.y != other.y return point at infinity
@@ -57,22 +54,18 @@ Point Point::operator+(const Point &other) const {
     return Point(x, y, _a, _b);
   }
 
-  // Case 3: self == other
-  if (*this == other) {
-    int prime = this->a().prime();
-    auto s = ((FieldElement(3, prime) * _x * _x) + _a) /
-             (FieldElement(2, prime) * _y);
-    auto x = (s * s) - (FieldElement(2, prime) * _x);
-    auto y = s * (_x - x) - _y;
-    return Point(x, y, _a, _b);
-  }
-
-  // Case 4: self == other and y == ZERO
   if (*this == other && _y == ZERO) {
     return INIFINITY_POINT;
   }
 
-  return INIFINITY_POINT;
+  // if (*this == other) {
+  int prime = this->a().prime();
+  auto s = ((3 * _x * _x) + _a) / (2 * _y);
+  auto x = (s * s) - (FieldElement(2, prime) * _x);
+  auto y = s * (_x - x) - _y;
+  std::cout << "*this == other: x: " << x << ", y: " << y << std::endl;
+  return Point(x, y, _a, _b);
+  // }
 };
 
 bool IsInfinity(const Point &p) { return p == INIFINITY_POINT; };

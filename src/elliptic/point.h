@@ -4,6 +4,8 @@
 #include <field_element.h>
 #include <iostream>
 
+#define ZERO FieldElement(0, 3)
+#define INIFINITY_POINT Point(ZERO, ZERO, ZERO, ZERO)
 class Point {
 private:
   FieldElement _x;

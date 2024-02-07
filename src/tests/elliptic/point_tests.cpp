@@ -4,61 +4,67 @@
 
 using namespace std;
 
-FieldElement elem(int x) { return FieldElement(x, 223); }
+FieldElement elem223(int x) { return FieldElement(x, 223); }
 
 BOOST_AUTO_TEST_SUITE(PointTests)
 
 namespace point {
 BOOST_AUTO_TEST_CASE(valid_point) {
-  FieldElement x(192, 223);
-  FieldElement y(105, 223);
-  FieldElement a(0, 223);
-  FieldElement b(7, 223);
-  // y * y == x * x * x + a * x + b
-  BOOST_CHECK_NO_THROW(Point(x, y, a, b));
+  int prime = 223;
+  pair<int, int> points[] = {
+      {192, 105},
+      {17, 56},
+      {1, 193},
+  };
+  FieldElement a(0, prime);
+  FieldElement b(7, prime);
+  for (auto p : points) {
+    FieldElement x(p.first, prime);
+    FieldElement y(p.second, prime);
+    BOOST_CHECK_NO_THROW(Point(x, y, a, b));
+  }
 }
 
 BOOST_AUTO_TEST_CASE(invalid_point) {
-  FieldElement x1(2, 223);
-  FieldElement y1(4, 223);
-  FieldElement a1(5, 223);
-  FieldElement b1(7, 223);
-  BOOST_CHECK_THROW(Point(x1, y1, a1, b1), std::invalid_argument);
+  int prime = 223;
+  pair<int, int> points[] = {
+      {200, 119},
+      {42, 99},
+  };
+  FieldElement a(0, prime);
+  FieldElement b(7, prime);
+  for (auto &p : points) {
+    FieldElement x(p.first, prime);
+    FieldElement y(p.second, prime);
+    BOOST_CHECK_THROW(Point(x, y, a, b), std::invalid_argument);
+  }
 }
 // add points
 BOOST_AUTO_TEST_CASE(add_points) {
-  Point p1(elem(2), elem(5), elem(5), elem(7));
-  Point p2(elem(-1), elem(-1), elem(5), elem(7));
-  Point p3(elem(3), elem(-7), elem(5), elem(7));
+  Point p1(elem223(192), elem223(105), elem223(0), elem223(7));
+  Point p2(elem223(17), elem223(56), elem223(0), elem223(7));
+  Point p3(elem223(170), elem223(142), elem223(0), elem223(7));
   BOOST_CHECK_EQUAL(p1 + p2, p3);
 }
 
 // // add point to infinity
 BOOST_AUTO_TEST_CASE(add_point_to_infinity) {
-  // Point p1(2, 5, 5, 7);
-  // Point p2(MY_INFINITY, MY_INFINITY, 5, 7);
-  // BOOST_CHECK_EQUAL(p1 + p2, p1);
-
-  // Point p3(2, 5, 5, 7);
-  // Point p4(MY_INFINITY, MY_INFINITY, 5, 7);
-  // BOOST_CHECK_EQUAL(p4 + p3, p3);
+  Point p1(elem223(192), elem223(105), elem223(0), elem223(7));
+  BOOST_CHECK_EQUAL(p1 + INIFINITY_POINT, p1);
+  BOOST_CHECK_EQUAL(INIFINITY_POINT + p1, p1);
 }
 
 // add point to self
 BOOST_AUTO_TEST_CASE(add_point_to_self) {
-  // Point p1(2, 5, 5, 7);
-  // Point p2(2, 5, 5, 7);
-  // cout << p1 + p2 << endl;
-  // Point p3(60, 71, 5, 7);
-  // BOOST_CHECK_EQUAL(p1 + p2, p3);
+  Point p1(elem223(192), elem223(105), elem223(0), elem223(7));
+  Point p2(elem223(49), elem223(71), elem223(0), elem223(7));
+  BOOST_CHECK_EQUAL(p1 + p1, p2);
 
-  // Point p4(3, 7, 5, 7);
-  // Point p5(3, 7, 5, 7);
-  // cout << p4 + p5 << endl;
-  // Point p6(3, 7, 5, 7);
-  // BOOST_CHECK_EQUAL(p4 + p5, p6);
+  Point p3(elem223(47), elem223(71), elem223(0), elem223(7));
+  Point p4(elem223(36), elem223(111), elem223(0), elem223(7));
+
+  BOOST_CHECK_EQUAL(p3 + p3, p4);
 }
-
 } // namespace point
 
-BOOST_AUTO_TEST_SUITE_END()
+BOOST_AUTO_TEST_SUITE_END();

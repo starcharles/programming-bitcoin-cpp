@@ -65,6 +65,13 @@ BOOST_AUTO_TEST_CASE(mul) {
 
     BOOST_CHECK_EQUAL(f1 * f2, f3);
   }
+  {
+    const FieldElement f1(2, 7);
+    const FieldElement f2(6, 7);
+
+    BOOST_CHECK_EQUAL(f1 * 3, f2);
+    BOOST_CHECK_EQUAL(3 * f1, f2);
+  }
 }
 BOOST_AUTO_TEST_CASE(div) {
   {

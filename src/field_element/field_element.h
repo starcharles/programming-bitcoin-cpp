@@ -16,6 +16,7 @@ public:
   bool operator!=(const FieldElement &other) const noexcept;
   FieldElement operator+(const FieldElement &other) const;
   FieldElement operator-(const FieldElement &other) const;
+  FieldElement operator*(const int scalar) const;
   FieldElement operator*(const FieldElement &other) const;
   FieldElement operator/(const FieldElement &other) const;
   FieldElement operator^(const int exponent) const;
@@ -23,6 +24,7 @@ public:
   int prime() const;
 };
 
+FieldElement operator*(int scalar, const FieldElement &f);
 int my_pow(int base, int exponent, int prime);
 std::ostream &operator<<(std::ostream &os, const FieldElement &f);
 

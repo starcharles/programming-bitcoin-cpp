@@ -48,6 +48,12 @@ FieldElement FieldElement::operator-(const FieldElement &other) const {
   return FieldElement(num, prime_);
 }
 
+FieldElement FieldElement::operator*(int scalar) const {
+  return FieldElement((num_ * scalar) % prime_, prime_);
+}
+
+FieldElement operator*(int scalar, const FieldElement &f) { return f * scalar; }
+
 FieldElement FieldElement::operator*(const FieldElement &other) const {
   if (prime_ != other.prime()) {
     throw std::invalid_argument("invalid prime");

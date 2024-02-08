@@ -1,9 +1,9 @@
 # Programming Bitcoin in C++
 - [Programming Bitcoin](https://www.amazon.com/Programming-Bitcoin-Learn-Program-Scratch/dp/1492031496)
 
-#1 On Mac
+## 1. On Mac
 
-## Prerequisites
+### Prerequisites
 - [C++](https://isocpp.org/)
  - [C++20](https://en.cppreference.com/w/cpp/20)
 - [Boost](https://www.boost.org/)
@@ -19,39 +19,39 @@
 $ ./autogen.sh && CPPFLAGS="-I/usr/local/Cellar/boost/1.84.0/include" ./configure && make
 ```
 
-## Run
+### Run
 
 ```bash 
 $ ./src/main
 ```
 
-## Test
+### Test
 
 ```bash
 $ make test
 ```
 
-#2 On Docker
-## Prerequisites
+## 2. On Docker
+### Prerequisites
 - [Docker](https://www.docker.com/)
 
 ```bash
 $ docker build -t programming-bitcoin-cpp .
 ```
 
-## Run
+### Run
 
 ```bash
 $ docker run -it --rm programming-bitcoin-cpp bash
 ```
 
-## Build
+### Build
 
 ```bash
 xxxx@xxxxxxxxxxxx:/# ./autogen.sh && ./configure && make
 ```
 
-## Test
+### Test
 
 ```bash
 xxxx@xxxxxxxxxxxx:/# ./autogen.sh && ./configure && make test

@@ -1,7 +1,7 @@
 #include <field_element/field_element.h>
 #include <iostream>
 
-FieldElement::FieldElement(uint256 num, uint256 prime)
+FieldElement::FieldElement(int256 num, int256 prime)
     : num_(num), prime_(prime) {
   if (num_ >= prime_ || num_ < 0) {
     throw std::invalid_argument("Num is not in field range 0 to p-1");
@@ -49,11 +49,11 @@ FieldElement FieldElement::operator-(const FieldElement &other) const {
   return FieldElement(num, prime_);
 }
 
-FieldElement FieldElement::operator*(uint256 scalar) const {
+FieldElement FieldElement::operator*(int256 scalar) const {
   return FieldElement((num_ * scalar) % prime_, prime_);
 }
 
-FieldElement operator*(uint256 scalar, const FieldElement &f) {
+FieldElement operator*(int256 scalar, const FieldElement &f) {
   return f * scalar;
 }
 
@@ -69,32 +69,32 @@ FieldElement FieldElement::operator/(const FieldElement &other) const {
   if (prime_ != other.prime()) {
     throw std::invalid_argument("invalid prime");
   }
-  uint256 num =
+  int256 num =
       (num_ * my_pow(other.num(), other.prime() - 2, other.prime())) % prime_;
   return FieldElement(num, prime_);
 }
 
-FieldElement FieldElement::operator^(const uint256 exponent) const {
-  uint256 n = exponent;
+FieldElement FieldElement::operator^(const int256 exponent) const {
+  int256 n = exponent;
   while (n < 0) {
     n += prime_ - 1;
   }
-  uint256 num = my_pow(num_, n, prime_);
+  int256 num = my_pow(num_, n, prime_);
   return FieldElement(num, prime_);
 }
 
-uint256 FieldElement::num() const { return num_; }
+int256 FieldElement::num() const { return num_; }
 
-uint256 FieldElement::prime() const { return prime_; }
+int256 FieldElement::prime() const { return prime_; }
 
 std::ostream &operator<<(std::ostream &os, const FieldElement &f) {
   os << "FieldElement(" << f.num() << ", " << f.prime() << ")";
   return os;
 }
 
-uint256 my_pow(uint256 base, uint256 exp, uint256 mod) {
-  uint256 result = 1;
-  for (uint256 i = 0; i < exp; i += 1) {
+int256 my_pow(int256 base, int256 exp, int256 mod) {
+  int256 result = 1;
+  for (int256 i = 0; i < exp; i += 1) {
     result *= base;
     result %= mod;
   }

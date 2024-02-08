@@ -1,7 +1,7 @@
 bin_PROGRAMS = main
 
 DEPENDENCY_SOURCES =\
-    util/uint256.cpp \
+    util/int256.cpp \
     field_element/field_element.cpp \
     elliptic/point.cpp \ 
     secp256k1/s256_field.cpp \ 

@@ -1,4 +1,5 @@
 # Programming Bitcoin in C++
+- [Programming Bitcoin](https://www.amazon.com/Programming-Bitcoin-Learn-Program-Scratch/dp/1492031496)
 
 ## Prerequisites
 - [C++](https://isocpp.org/)
@@ -11,7 +12,7 @@
 
 ```bash
 ## Build
-
+ - On my Mac
 ```bash
 $ ./autogen.sh && CPPFLAGS="-I/usr/local/Cellar/boost/1.84.0/include" ./configure && make
 ```

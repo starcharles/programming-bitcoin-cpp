@@ -3,6 +3,7 @@
 
 #include <field_element/field_element.h>
 #include <iostream>
+#include <util/int256.h>
 
 #define ZERO FieldElement(0, 3)
 #define INIFINITY_POINT Point(ZERO, ZERO, ZERO, ZERO)
@@ -19,14 +20,14 @@ public:
   bool operator==(const Point &other) const;
   bool operator!=(const Point &other) const;
   Point operator+(const Point &other) const;
-  Point operator*(const int coefficient) const;
+  Point operator*(const int256 coefficient) const;
   FieldElement a() const;
   FieldElement b() const;
   FieldElement x() const;
   FieldElement y() const;
 };
 
-Point operator*(const int coefficient, const Point &p);
+Point operator*(const int256 coefficient, const Point &p);
 
 bool IsInfinity(const Point &p);
 

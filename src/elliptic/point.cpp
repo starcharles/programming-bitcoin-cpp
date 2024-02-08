@@ -66,16 +66,16 @@ Point Point::operator+(const Point &other) const {
   // }
 };
 
-Point Point::operator*(const int coefficient) const {
+Point Point::operator*(const int256 coefficient) const {
   auto current = *this;
   auto result = INIFINITY_POINT;
-  for (int i = 0; i < coefficient; i++) {
+  for (int256 i = 0; i < coefficient; i += 1) {
     result = result + current;
   }
   return result;
 };
 
-Point operator*(const int coefficient, const Point &p) {
+Point operator*(const int256 coefficient, const Point &p) {
   return p * coefficient;
 };
 

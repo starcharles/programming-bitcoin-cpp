@@ -7,8 +7,8 @@
 using namespace std;
 
 // P is the prime number 2**256 - 2**32 - 977
-static const int256 P("11579208923731619542357098500868790785326998466564056"
-                      "4039457584007913129639747");
+static const int256
+    P("0xfffffffffffffffffffffffffffffffffffffffffffffffffffffffefffffc2f");
 
 class S256Field : public FieldElement {
 public:

@@ -10,7 +10,7 @@ DEPENDENCY_SOURCES =\
 main_SOURCES = main.cpp $(DEPENDENCY_SOURCES)
 
 LDADD=
-ARCH=-arch x86_64
+ARCH=-arch arm64
 AM_CPPFLAGS = $(ARCH) -I$(srcdir)
 AM_CPPFLAGS_TEST = $(ARCH) -I$(srcdir)
 

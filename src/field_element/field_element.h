@@ -2,6 +2,7 @@
 #define PROGRAMMING_BITCOIN_FIELD_ELEMENT_H
 
 #include <iostream>
+#include <util/uint256.h>
 
 class FieldElement {
 private:

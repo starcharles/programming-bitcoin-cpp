@@ -1,6 +1,5 @@
-#include <field_element.h>
+#include <field_element/field_element.h>
 #include <iostream>
-#include <uint256.h>
 
 FieldElement::FieldElement(uint256 num, uint256 prime)
     : num_(num), prime_(prime) {

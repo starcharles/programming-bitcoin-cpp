@@ -1,7 +1,7 @@
 #ifndef PROGRAMMING_BITCOIN_POINT_H
 #define PROGRAMMING_BITCOIN_POINT_H
 
-#include <field_element.h>
+#include <field_element/field_element.h>
 #include <iostream>
 
 #define ZERO FieldElement(0, 3)

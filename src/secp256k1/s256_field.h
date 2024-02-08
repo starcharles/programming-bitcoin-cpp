@@ -1,5 +1,5 @@
-#include <field_element.h>
-#include <uint256.h>
+#include <field_element/field_element.h>
+#include <util/uint256.h>
 
 using namespace std;
 

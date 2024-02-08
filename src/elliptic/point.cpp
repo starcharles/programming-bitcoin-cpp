@@ -1,5 +1,5 @@
+#include <elliptic/point.h>
 #include <iostream>
-#include <point.h>
 #include <sstream>
 
 Point::Point(FieldElement x, FieldElement y, FieldElement a, FieldElement b)
@@ -59,9 +59,8 @@ Point Point::operator+(const Point &other) const {
   }
 
   // if (*this == other) {
-  int prime = this->a().prime();
   auto s = ((3 * _x * _x) + _a) / (2 * _y);
-  auto x = (s * s) - (FieldElement(2, prime) * _x);
+  auto x = (s * s) - (2 * _x);
   auto y = s * (_x - x) - _y;
   return Point(x, y, _a, _b);
   // }

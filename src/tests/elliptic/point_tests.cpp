@@ -1,6 +1,6 @@
 
 #include <boost/test/included/unit_test.hpp>
-#include <point.h>
+#include <elliptic/point.h>
 
 using namespace std;
 

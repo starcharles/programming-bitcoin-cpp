@@ -1,10 +1,11 @@
 
 #include <boost/test/included/unit_test.hpp>
 #include <elliptic/point.h>
+#include <util/int512.h>
 
 using namespace std;
 
-FieldElement elem223(int x) { return FieldElement(x, 223); }
+FieldElement elem223(int512 x) { return FieldElement(x, 223); }
 
 BOOST_AUTO_TEST_SUITE(PointTests)
 

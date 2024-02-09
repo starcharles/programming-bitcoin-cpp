@@ -1,7 +1,7 @@
 #include <field_element/field_element.h>
 #include <iostream>
 
-FieldElement::FieldElement(int256 num, int256 prime)
+FieldElement::FieldElement(int512 num, int512 prime)
     : num_(num), prime_(prime) {
   if (num >= prime || num < 0) {
     throw std::invalid_argument("Num is not in field range 0 to p-1");
@@ -49,11 +49,11 @@ FieldElement FieldElement::operator-(const FieldElement &other) const {
   return FieldElement(num, prime_);
 }
 
-FieldElement FieldElement::operator*(int256 scalar) const {
+FieldElement FieldElement::operator*(int512 scalar) const {
   return FieldElement((num_ * scalar) % prime_, prime_);
 }
 
-FieldElement operator*(int256 scalar, const FieldElement &f) {
+FieldElement operator*(int512 scalar, const FieldElement &f) {
   return f * scalar;
 }
 
@@ -69,32 +69,32 @@ FieldElement FieldElement::operator/(const FieldElement &other) const {
   if (prime_ != other.prime()) {
     throw std::invalid_argument("invalid prime");
   }
-  int256 num =
+  int512 num =
       (num_ * my_pow(other.num(), other.prime() - 2, other.prime())) % prime_;
   return FieldElement(num, prime_);
 }
 
-FieldElement FieldElement::operator^(const int256 exponent) const {
-  int256 n = exponent;
+FieldElement FieldElement::operator^(const int512 exponent) const {
+  int512 n = exponent;
   while (n < 0) {
     n += prime_ - 1;
   }
-  int256 num = my_pow(num_, n, prime_);
+  int512 num = my_pow(num_, n, prime_);
   return FieldElement(num, prime_);
 }
 
-int256 FieldElement::num() const { return num_; }
+int512 FieldElement::num() const { return num_; }
 
-int256 FieldElement::prime() const { return prime_; }
+int512 FieldElement::prime() const { return prime_; }
 
 std::ostream &operator<<(std::ostream &os, const FieldElement &f) {
   os << "FieldElement(" << f.num() << ", " << f.prime() << ")";
   return os;
 }
 
-int256 my_pow(int256 base, int256 exp, int256 mod) {
-  int256 result = 1;
-  for (int256 i = 0; i < exp; i += 1) {
+int512 my_pow(int512 base, int512 exp, int512 mod) {
+  int512 result = 1;
+  for (int512 i = 0; i < exp; i += 1) {
     result *= base;
     result %= mod;
   }

@@ -9,7 +9,8 @@ DEPENDENCY_SOURCES =\
     elliptic/point.cpp \ 
     secp256k1/s256_field.cpp \ 
     secp256k1/s256_point.cpp \
-    signature/signature.cpp 
+    signature/signature.cpp \
+    private_key/private_key.cpp 
 
 main_SOURCES = main.cpp $(DEPENDENCY_SOURCES)
 

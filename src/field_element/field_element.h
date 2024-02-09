@@ -10,6 +10,7 @@ private:
   int256 prime_;
 
 public:
+  FieldElement() = delete;
   FieldElement(int256 num, int256 prime);
   FieldElement(const FieldElement &other) noexcept;
   FieldElement &operator=(const FieldElement &other) noexcept;

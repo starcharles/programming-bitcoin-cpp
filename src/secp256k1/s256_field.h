@@ -4,14 +4,14 @@
 #include <field_element/field_element.h>
 #include <util/int256.h>
 
-using namespace std;
-
 // P is the prime number 2**256 - 2**32 - 977
-static const int256
-    P("0xfffffffffffffffffffffffffffffffffffffffffffffffffffffffefffffc2f");
+#define P                                                                      \
+  int256("1157920892373161954235709850086879078532699846656405640394575840079" \
+         "08834671663")
 
 class S256Field : public FieldElement {
 public:
+  S256Field() = delete;
   S256Field(const int256 &num);
 };
 

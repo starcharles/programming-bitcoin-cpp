@@ -69,6 +69,6 @@ int256 &int256::operator%=(const int256 &other) {
 boost::multiprecision::int256_t int256::value() const { return value_; }
 
 std::ostream &operator<<(std::ostream &os, const int256 &u) {
-  os << "uint256(" << u.value() << ")";
+  os << "int256(" << std::hex << u.value() << ")";
   return os;
 }

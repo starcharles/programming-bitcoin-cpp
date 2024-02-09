@@ -3,7 +3,7 @@
 
 FieldElement::FieldElement(int256 num, int256 prime)
     : num_(num), prime_(prime) {
-  if (num_ >= prime_ || num_ < 0) {
+  if (num >= prime || num < 0) {
     throw std::invalid_argument("Num is not in field range 0 to p-1");
   }
 }

@@ -5,16 +5,17 @@
 
 ### Prerequisites
 - [C++](https://isocpp.org/)
- - [C++20](https://en.cppreference.com/w/cpp/20)
+    - [C++20](https://en.cppreference.com/w/cpp/20)
 - [Boost](https://www.boost.org/)
 - [Autotools](https://www.gnu.org/software/automake/)
- - [Autoconf](https://www.gnu.org/software/autoconf/)
- - [Automake](https://www.gnu.org/software/automake/)
- - [Libtool](https://www.gnu.org/software/libtool/)
+    - [Autoconf](https://www.gnu.org/software/autoconf/)
+    - [Automake](https://www.gnu.org/software/automake/)
+    - [Libtool](https://www.gnu.org/software/libtool/)
 
-```bash
 ## Build
+
  - On my Mac
+
 ```bash
 $ ./autogen.sh && CPPFLAGS="-I/usr/local/Cellar/boost/1.84.0/include" ./configure && make
 ```
@@ -48,11 +49,11 @@ $ docker run -it --rm programming-bitcoin-cpp bash
 ### Build
 
 ```bash
-xxxx@xxxxxxxxxxxx:/# ./autogen.sh && ./configure && make
+xxxx@xxxxxxxxxxxx:/# make
 ```
 
 ### Test
 
 ```bash
-xxxx@xxxxxxxxxxxx:/# ./autogen.sh && ./configure && make test
+xxxx@xxxxxxxxxxxx:/# make test
 ```

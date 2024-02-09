@@ -1,5 +1,6 @@
 #include <field_element/field_element.h>
 #include <iostream>
+#include <util/math.h>
 
 FieldElement::FieldElement(int512 num, int512 prime)
     : num_(num), prime_(prime) {
@@ -70,7 +71,8 @@ FieldElement FieldElement::operator/(const FieldElement &other) const {
     throw std::invalid_argument("invalid prime");
   }
   int512 num =
-      (num_ * my_pow(other.num(), other.prime() - 2, other.prime())) % prime_;
+      (num_ * math::my_pow(other.num(), other.prime() - 2, other.prime())) %
+      prime_;
   return FieldElement(num, prime_);
 }
 
@@ -79,7 +81,7 @@ FieldElement FieldElement::operator^(const int512 exponent) const {
   while (n < 0) {
     n += prime_ - 1;
   }
-  int512 num = my_pow(num_, n, prime_);
+  int512 num = math::my_pow(num_, n, prime_);
   return FieldElement(num, prime_);
 }
 
@@ -90,13 +92,4 @@ int512 FieldElement::prime() const { return prime_; }
 std::ostream &operator<<(std::ostream &os, const FieldElement &f) {
   os << "FieldElement(" << f.num() << ", " << f.prime() << ")";
   return os;
-}
-
-int512 my_pow(int512 base, int512 exp, int512 mod) {
-  int512 result = 1;
-  for (int512 i = 0; i < exp; i += 1) {
-    result *= base;
-    result %= mod;
-  }
-  return result;
 }

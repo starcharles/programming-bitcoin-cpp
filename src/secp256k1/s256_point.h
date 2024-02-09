@@ -3,6 +3,7 @@
 
 #include <elliptic/point.h>
 #include <secp256k1/s256_field.h>
+#include <signature/signature.h>
 #include <util/int512.h>
 
 #define A S256Field(0)
@@ -16,6 +17,7 @@ public:
   S256Point(const S256Field &x, const S256Field &y);
   S256Point(const Point &p);
   S256Point operator*(const int512 &coefficient) const;
+  bool verify(const int512 &z, const Signature &sig) const;
 };
 
 S256Point operator*(const int512 &coefficient, const S256Point &p);

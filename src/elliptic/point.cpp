@@ -67,13 +67,18 @@ Point Point::operator+(const Point &other) const {
 };
 
 Point Point::operator*(const int512 coefficient) const {
-  auto current = *this;
-  auto result = INIFINITY_POINT;
-  for (int512 i = 0; i < coefficient; i += 1) {
-    result = result + current;
+  Point result = INIFINITY_POINT;
+  Point current = *this;
+  int512 coeff = coefficient;
+  while (coeff > 0) {
+    if (coeff % 2 == 1) {
+      result = result + current;
+    }
+    current = current + current;
+    coeff = coeff / 2;
   }
   return result;
-};
+}
 
 Point operator*(const int512 coefficient, const Point &p) {
   return p * coefficient;

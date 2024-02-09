@@ -27,7 +27,6 @@ public:
 };
 
 FieldElement operator*(int512 scalar, const FieldElement &f);
-int512 my_pow(int512 base, int512 exponent, int512 prime);
 std::ostream &operator<<(std::ostream &os, const FieldElement &f);
 
 #endif // PROGRAMMING_BITCOIN_FIELD_ELEMENT_H

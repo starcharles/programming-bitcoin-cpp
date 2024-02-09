@@ -19,8 +19,6 @@ BOOST_AUTO_TEST_CASE(infinity) {
 
   auto n = int512(
       "0xfffffffffffffffffffffffffffffffebaaedce6af48a03bbfd25e8cd0364141");
-  // auto n =
-  //     int256("115792089237316195423570985008687907852837564279074904382605");
 
   BOOST_CHECK_EQUAL(n * G, S256Point::INIFINITY_POINT);
 }

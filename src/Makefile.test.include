@@ -3,7 +3,8 @@ TESTS = \
 	tests/main.cpp \
 	tests/field_element/field_element_tests.cpp \
 	tests/elliptic/point_tests.cpp \
-	tests/secp256k1/s256_point_tests.cpp 
+	tests/secp256k1/s256_point_tests.cpp \
+	tests/signature/signature_tests.cpp 
 	
 test_SOURCES = $(TESTS)
 test_CPPFLAGS = $(CPPFLAGS) $(AM_CPPFLAGS_TEST)

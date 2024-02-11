@@ -14,9 +14,11 @@ DEPENDENCY_SOURCES =\
 
 main_SOURCES = main.cpp $(DEPENDENCY_SOURCES)
 
-LDADD=-lboost_random
+LDFLAGS=-L/opt/homebrew/Cellar/boost/1.84.0/lib
+LDLIBS=-lboost_random
+LDADD=
 ARCH=
-AM_CPPFLAGS = $(ARCH) -I$(srcdir)
-AM_CPPFLAGS_TEST = $(ARCH) -I$(srcdir)
+AM_CPPFLAGS = $(ARCH) $(LDFLAGS) -I$(srcdir) $(LDLIBS) $(LDADD)
+AM_CPPFLAGS_TEST = $(ARCH) $(LDFLAGS) -I$(srcdir) $(LDLIBS) $(LDADD)
 
 include Makefile.test.include

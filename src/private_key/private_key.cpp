@@ -15,17 +15,13 @@ Signature PrivateKey::sign(const int512 &z) const {
       boost::multiprecision::pow(boost::multiprecision::cpp_int(2), 256) - 1;
   boost::random::uniform_int_distribution<boost::multiprecision::cpp_int> dist(
       0, upper_limit);
-
   auto random_number = dist(gen);
-
-  int512 k =
-      int512(random_number.convert_to<boost::multiprecision::int512_t>());
-  ;
+  int512 k = random_number.convert_to<boost::multiprecision::int512_t>();
 
   auto r = (k * G).x().num();
   auto k_inv = math::my_pow(k, N - 2, N);
-  auto s = (z + r * secret_) * k_inv % N;
-  if (s > N / 2) {
+  auto s = ((z + r * secret_) * k_inv) % N;
+  if (s > (N / 2)) {
     s = N - s;
   }
   return Signature(r, s);

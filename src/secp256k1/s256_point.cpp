@@ -13,9 +13,10 @@ S256Point S256Point::operator*(const int512 &coefficient) const {
 
 bool S256Point::verify(const int512 &z, const Signature &sig) const {
   auto s_inv = math::my_pow(sig.s(), N - 2, N);
-  auto u = z * s_inv % N;
-  auto v = sig.r() * s_inv % N;
+  auto u = (z * s_inv) % N;
+  auto v = (sig.r() * s_inv) % N;
   auto total = u * G + v * *this;
+
   return total.x().num() == sig.r();
 }
 

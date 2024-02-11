@@ -11,7 +11,7 @@ test_SOURCES = $(TESTS)
 test_CPPFLAGS = $(CPPFLAGS) $(AM_CPPFLAGS_TEST)
 CLEAN_TEST = tests/**/*.gcda
 CLEAN_FILES = tests/test_main $(CLEAN_TEST)
-LDADD+=-lboost_unit_test_framework -lboost_random
+LDADD+=-lboost_unit_test_framework
 
 # make commands
 test: test_run test_clean 

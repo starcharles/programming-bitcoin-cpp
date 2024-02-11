@@ -1,28 +1,33 @@
 #ifndef PROGRAMMING_BITCOIN_POINT_H
 #define PROGRAMMING_BITCOIN_POINT_H
 
+#include <field_element/field_element.h>
 #include <iostream>
+#include <util/int512.h>
 
-#define MY_INFINITY std::numeric_limits<int>::max()
-
+#define ZERO FieldElement(0, 3)
+#define INIFINITY_POINT Point(ZERO, ZERO, ZERO, ZERO)
 class Point {
 private:
-  int _x;
-  int _y;
-  int _a;
-  int _b;
+  FieldElement _x;
+  FieldElement _y;
+  FieldElement _a;
+  FieldElement _b;
 
 public:
   Point() = delete;
-  Point(int x, int y, int a, int b);
+  Point(FieldElement x, FieldElement y, FieldElement a, FieldElement b);
   bool operator==(const Point &other) const;
   bool operator!=(const Point &other) const;
   Point operator+(const Point &other) const;
-  int a() const;
-  int b() const;
-  int x() const;
-  int y() const;
+  Point operator*(const int512 coefficient) const;
+  FieldElement a() const;
+  FieldElement b() const;
+  FieldElement x() const;
+  FieldElement y() const;
 };
+
+Point operator*(const int512 coefficient, const Point &p);
 
 bool IsInfinity(const Point &p);
 

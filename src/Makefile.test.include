@@ -2,19 +2,22 @@
 TESTS = \
 	tests/main.cpp \
 	tests/field_element/field_element_tests.cpp \
-	tests/elliptic/point_tests.cpp 
+	tests/elliptic/point_tests.cpp \
+	tests/secp256k1/s256_point_tests.cpp \
+	tests/signature/signature_tests.cpp \
+	tests/private_key/private_key_tests.cpp 
 	
-#tests/main.cpp \
-#tests/elliptic/point_tests.cpp 
-
 test_SOURCES = $(TESTS)
-test_CPPFLAGS = $(AM_CPPFLAGS_TEST)
+test_CPPFLAGS = $(CPPFLAGS) $(AM_CPPFLAGS_TEST)
 CLEAN_TEST = tests/**/*.gcda
-CLEAN_FILES = $(CLEAN_TEST)
-LDADD+=-lboost_unit_test_framework
+CLEAN_FILES = tests/test_main $(CLEAN_TEST)
+#LDADD+=-lboost_unit_test_framework
 
 # make commands
 test: test_run test_clean 
+
+test2:
+	$(CXX) -E $(CXXFLAGS) $(test_CPPFLAGS) $(test_SOURCES) $(DEPENDENCY_SOURCES)
 
 test_run: $(test_SOURCES)
 	$(CXX) $(CXXFLAGS) $(test_CPPFLAGS) $(test_SOURCES) $(DEPENDENCY_SOURCES) -o tests/test_main $(LDADD)

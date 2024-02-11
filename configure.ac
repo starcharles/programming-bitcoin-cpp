@@ -1,7 +1,7 @@
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
-AC_PREREQ([2.72])
+AC_PREREQ([2.70])
 AC_INIT([ProgrammingBitcoin-CPP], [0.0.1], [stardustforever012@gmail.com])
 AM_INIT_AUTOMAKE([foreign subdir-objects])
 AC_CONFIG_SRCDIR([src/main.cpp])
